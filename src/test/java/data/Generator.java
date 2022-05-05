@@ -19,11 +19,7 @@ public class Generator {
     public static RegistrationInfo generateRequestCard(String locale) {
         Faker faker = new Faker(new Locale(locale));
         return new RegistrationInfo(faker.address().cityName(),
-                faker.name().lastName() + " " + faker.name().firstName(),generatePhone());
-    }
-    public static String generatePhone() {
-        String[] number = new String[]{"+79012345678"};
-        return number[random.nextInt(number.length)];
+                faker.name().lastName() + " " + faker.name().firstName(),faker.phoneNumber().phoneNumber());
     }
 
     public static String generateDate(int shift, int range) {
