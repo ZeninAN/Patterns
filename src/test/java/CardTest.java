@@ -49,17 +49,17 @@ public class CardTest {
         $x("//input[@name='name']").setValue(registrationInfo.getName());
         $x("//input[@name='phone']").setValue(registrationInfo.getPhone());
         $("[data-test-id='agreement']").click();
-        $(withText("Забронировать")).click();
-        $("[data-test-id='notification'] .notification__title").should(visible, Duration.ofSeconds(15));
-        $("[data-test-id='notification'] .notification__content")
-                .should(Condition.text("Встреча успешно забронирована на  " + planningDate), Duration.ofSeconds(15));
+        $(withText("Запланировать")).click();
+        $("[data-test-id='success-notification'] .notification__title").should(visible, Duration.ofSeconds(15));
+        $("[data-test-id='success-notification'] .notification__content")
+                .should(Condition.text("Встреча успешно запланирована на " + planningDate), Duration.ofSeconds(15));
         String secondDate = generateDate(5, 4);
         $("[placeholder='Дата встречи']").doubleClick().sendKeys(Keys.BACK_SPACE);
         $("[placeholder='Дата встречи']").setValue(secondDate);
-        $(withText("Забронировать")).click();
-        $("[data-test-id=notification] .notification__content")
+        $(withText("Запланировать")).click();
+        $("[data-test-id='success-notification'] .notification__content")
                 .should(visible, ofSeconds(15))
-                .shouldHave(exactText("Встреча успешно забронирована на  " + secondDate));
+                .shouldHave(exactText("Встреча успешно запланирована на  " + secondDate));
     }
     @Test
     void shouldSubmitComplexRequest() {
@@ -78,7 +78,7 @@ public class CardTest {
         $("[data-test-id='phone'] input").setValue(registrationInfo.getPhone());
         $("[data-test-id=agreement]>.checkbox__box").click();
         $("button>.button__content").click();
-        $("[class='notification__content']").shouldHave(text("Встреча успешно забронирована на " + dateOfMeetingFormatted), ofSeconds(15));
+        $("[class='notification__content']").shouldHave(text("Встреча успешно запланирована на " + dateOfMeetingFormatted), ofSeconds(15));
 
     }
 
